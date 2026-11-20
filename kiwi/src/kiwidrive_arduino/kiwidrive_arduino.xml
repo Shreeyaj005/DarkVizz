@@ -1,0 +1,9 @@
+<library path="kiwidrive_arduino">
+  <class name="kiwidrive_arduino/KiwiDriveArduino"
+         type="KiwiDriveArduino"
+         base_class_type="hardware_interface::SystemInterface">
+    <description>
+      ros2_control hardware interface for a 3-wheel kiwi drive on an ESP32 serial bridge.
+    </description>
+  </class>
+</library>
