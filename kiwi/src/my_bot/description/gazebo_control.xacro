@@ -1,0 +1,58 @@
+<?xml version="1.0"?>
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro">
+
+    <!-- ================= ros2_control: 3 velocity-controlled wheels ================= -->
+    <ros2_control name="GazeboSystem" type="system">
+        <hardware>
+            <plugin>gazebo_ros2_control/GazeboSystem</plugin>
+        </hardware>
+
+        <joint name="wheel_1_joint">
+            <command_interface name="velocity"/>
+            <state_interface name="velocity"/>
+            <state_interface name="position"/>
+        </joint>
+
+        <joint name="wheel_2_joint">
+            <command_interface name="velocity"/>
+            <state_interface name="velocity"/>
+            <state_interface name="position"/>
+        </joint>
+
+        <joint name="wheel_3_joint">
+            <command_interface name="velocity"/>
+            <state_interface name="velocity"/>
+            <state_interface name="position"/>
+        </joint>
+    </ros2_control>
+
+    <!-- Loads controller_manager inside Gazebo. Change my_bot to your package name -->
+    <gazebo>
+        <plugin name="gazebo_ros2_control" filename="libgazebo_ros2_control.so">
+            <parameters>$(find my_bot)/config/kiwi_controllers.yaml</parameters>
+        </plugin>
+    </gazebo>
+
+    <!-- ================= Fake omni wheels via anisotropic friction =================
+         Wheel cylinder axis = local z = the axle.
+         mu1 acts along fdir1 (the axle)  -> low, so the wheel slides sideways like rollers would
+         mu2 acts perpendicular (rolling) -> high, so the wheel grips and drives the robot -->
+    <gazebo reference="wheel_1">
+        <mu1>0.01</mu1>
+        <mu2>1.0</mu2>
+        <fdir1>0 0 1</fdir1>
+    </gazebo>
+
+    <gazebo reference="wheel_2">
+        <mu1>0.01</mu1>
+        <mu2>1.0</mu2>
+        <fdir1>0 0 1</fdir1>
+    </gazebo>
+
+    <gazebo reference="wheel_3">
+        <mu1>0.01</mu1>
+        <mu2>1.0</mu2>
+        <fdir1>0 0 1</fdir1>
+    </gazebo>
+
+</robot>
